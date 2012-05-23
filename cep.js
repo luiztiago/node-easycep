@@ -1,5 +1,16 @@
 var con = require('./config.js');
 
+var respSend = function(res, resp, format){
+	if(!format || format == 'json'){
+		res.json(resp);
+	}else{
+		var Js2Xml = require("js2xml").Js2Xml,
+			xml = new Js2Xml("item", resp);
+		// xml = xml.toString();
+		res.send(xml);
+	}
+}
+
 exports.search = function(res, string, format){
 	console.log(string);
 
@@ -11,7 +22,9 @@ exports.search = function(res, string, format){
 			data: {},
 			message: 'Formato do CEP precisa ser utilizado no formato 00000-000'
 		}
-		res.json(resp);
+
+		respSend(res, resp, format);		
+		
 		return false;
 	}
 
@@ -44,7 +57,7 @@ exports.search = function(res, string, format){
 									data: address
 								}
 
-								res.json(resp);
+								respSend(res, resp, format);
 							}
 						}
 				});
