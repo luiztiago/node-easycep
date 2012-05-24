@@ -35,7 +35,8 @@ exports.search = function(res, string, format){
 									logradouro: item.logradouro,
 									bairro: item.bairro,
 									cep: item.cep,
-									cidade: item.cidade
+									cidade: item.cidade,
+									uf: uf
 								}
 
 								var resp = {
